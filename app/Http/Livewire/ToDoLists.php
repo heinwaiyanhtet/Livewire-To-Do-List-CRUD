@@ -8,29 +8,32 @@ use App\Models\Todos as Todos;
 class ToDoLists extends Component
 {
 
-    public $todos;
+    public $todo;
 
     protected $rules = [
-        'todos.*.todos' => 'required|not_null|min:1',
-        'todos.*.priority' => 'nullable|in:high,medium,low',
-        'todos.*.cateogry' => 'nullabe',
-        'todos.*.sorting' => 'nullable|integer',
-        'todos.*.message' => 'nullable',
-        'todos.*.duedata' => 'required|data',
+        'todo.*.todos' => 'required|not_null|min:1',
+        'todo.*.priority' => 'nullable|in:high,medium,low',
+        'todo.*.cateogry' => 'nullabe',
+        'todo.*.sorting' => 'nullable|integer',
+        'todo.*.message' => 'nullable',
+        'todo.*.duedata' => 'required|data',
     ];
     
     public function resetFields(){
-        $this->todos = '';
+        $this->todo = '';
     }
 
 
+    public function mount(){
+        // $this->todos = $todo->todos
+    }
 
     public function storeToDo(){
         $this->validate();
         try
         {
             Todos::create([
-                'todos' => $this->todos,
+                'todos' => $this->todo,
             ]);
             session()->flash('success','Post Updated Successfully!!');
             $this->resetFields();
@@ -43,10 +46,15 @@ class ToDoLists extends Component
        
     }
 
-
+    // public function mount(){
+    //     $this->todos = Todos::all();
+    // }
 
     public function render()
     {
-        return view('livewire.to-do-lists');
+    
+        return view('livewire.to-do-lists',[
+            'todos' => Todos::all()
+        ]);
     }
 }

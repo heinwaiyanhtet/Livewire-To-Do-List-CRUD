@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('todos', function (Blueprint $table) {
             $table->id();
             $table->string('todos');
-            $table->enum('priority',['high','medium','low']);
+            $table->enum('priority',['high','medium','low'])->nullable();
             $table->string('category')->nullable();
             $table->integer('sorting')->nullable();
             $table->string('message')->nullable();
-            $table->timestamp('duedate');
+            $table->timestamp('duedate')->nullable();
             $table->timestamps();
         });
     }
