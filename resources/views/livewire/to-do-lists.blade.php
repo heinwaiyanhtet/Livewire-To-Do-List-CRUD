@@ -1,7 +1,55 @@
-<div class="container flex justify-center mt-20">
-    
+<div class="container flex justify-center mt-6">
+
     <div class="w-7/12">
-        <form wire:submit.prevent="storeToDo()" methid>   
+
+
+
+
+
+            @forelse($todos as $todo)
+                <!-- {{ $todo->todos}} -->
+
+            <div>
+                <div class="mt-6 border border-gray-900 rounded-lg bg-gray-50 p-2 block">
+                    <div class="flex items-center">
+                    <input id="checkbox-{{$loop->index}}" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                    <label class="ml-2" for="checkbox-{{$loop->index}}">
+                            {{ $todo->todos }}
+                    </label>
+                </div>
+
+                <div class="flex justify-start mt-4">
+
+                       <textarea rows="6" class="mr-6 block p-2.5 w-2/4 text-xs text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your notes for tasks here..."></textarea>
+                        
+                        <div class="w-2/4">
+                            <label for="Priority" class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Priority</label>
+                            <select id="Priority" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                {{-- <option selected>Select Priority</option> --}}
+                                <option value="US">None</option>
+                                <option value="CA">Low</option>
+                                <option value="FR">Meium</option>
+                                <option value="DE">High</option>
+                            </select>
+                        </div>
+
+                </div>
+
+
+
+                </div>
+
+            </div>
+
+            @empty
+
+            <div class="mt-14 border border-gray-900 rounded-md bg-gray-50 h-9 items-center flex justify-center">
+                <h1 class="text-center"> There is no todo here</h1>
+            </div>
+
+            @endforelse
+
+        <form wire:submit.prevent="storeToDo()" class="mt-6 mb-6">
             <label for="search" class="mb-2 text-sm font-medium text-gray-900 sr-only">Search</label>
             <div class="relative">
                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -13,28 +61,6 @@
             </div>
         </form>
 
-
-        
-
-        @if(count($todos) > 0)
-        
-            @foreach($todos as $todo)
-
-                {{$todo->todos}}
-
-            @endforeach
-         
-
-        @else
-            <div class="mt-14 border border-gray-900 rounded-md bg-gray-50 h-9 items-center flex justify-center">
-                <h1 class="text-center"> There is no todo here</h1>
-            </div>
-        @endif
-        
-
-        <div class="border-gray-900 rounded-lg bg-gray-50">
-            
-        </div>
     </div>
 
 </div>

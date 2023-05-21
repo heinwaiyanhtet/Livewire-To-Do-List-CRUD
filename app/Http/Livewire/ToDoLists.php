@@ -18,7 +18,7 @@ class ToDoLists extends Component
         'todo.*.message' => 'nullable',
         'todo.*.duedata' => 'required|data',
     ];
-    
+
     public function resetFields(){
         $this->todo = '';
     }
@@ -43,7 +43,7 @@ class ToDoLists extends Component
         {
             session()->flash('error','Something goes wrong!');
         }
-       
+
     }
 
     // public function mount(){
@@ -52,7 +52,7 @@ class ToDoLists extends Component
 
     public function render()
     {
-    
+
         return view('livewire.to-do-lists',[
             'todos' => Todos::all()
         ]);

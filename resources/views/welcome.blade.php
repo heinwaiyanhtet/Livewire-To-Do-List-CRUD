@@ -9,7 +9,7 @@
     @livewireStyles
 </head>
 <body>
-    
+
     <livewire:to-do-lists />
 
     @livewireScripts
