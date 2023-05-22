@@ -7,7 +7,6 @@
 
 
             @forelse($todos as $todo)
-                <!-- {{ $todo->todos}} -->
 
             <div>
                 <div class="mt-6 border border-gray-900 rounded-lg bg-gray-50 p-2 block">
@@ -20,8 +19,11 @@
 
                 <div class="flex justify-start mt-4">
 
-                       <textarea rows="6" class="mr-6 block p-2.5 w-2/4 text-xs text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your notes for tasks here..."></textarea>
-                        
+                        <div class="w-2/4">
+                            <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Notes </label>
+                            <textarea id="message" rows="6" class="mr-6 w-11/12 p-2.5  text-xs text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your notes for tasks here..."></textarea>
+                        </div>
+
                         <div class="w-2/4">
                             <label for="Priority" class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Priority</label>
                             <select id="Priority" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -31,6 +33,8 @@
                                 <option value="FR">Meium</option>
                                 <option value="DE">High</option>
                             </select>
+
+                            <button wire:click="deleteToDo({{$todo->id}})" type="button" class="mt-2 text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Delete</button>
                         </div>
 
                 </div>

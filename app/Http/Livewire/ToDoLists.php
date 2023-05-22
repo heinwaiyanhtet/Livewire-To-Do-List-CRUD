@@ -41,9 +41,20 @@ class ToDoLists extends Component
 
         catch(Exception $ex)
         {
-            session()->flash('error','Something goes wrong!');
+            session()->flash('error_create','Something goes wrong!');
         }
 
+    }
+
+    public function deleteToDo($id){
+        try{
+            Todos::find($id)->delete();
+            session()->flash('success_delete','todo deleted succesfully!!');
+        }
+
+        catch(\Exception $e){
+            session()->flash('error_delete',"Something goes wrong!!");
+        }
     }
 
     // public function mount(){
