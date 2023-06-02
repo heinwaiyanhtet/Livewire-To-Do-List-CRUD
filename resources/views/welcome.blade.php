@@ -13,6 +13,10 @@
     <livewire:to-do-lists />
 
     @livewireScripts
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    {{-- <script src="to-do-list/public/vendor/livewire/livewire.js"></script> --}}
+    {{-- <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script> --}}
 
 </body>
 </html>

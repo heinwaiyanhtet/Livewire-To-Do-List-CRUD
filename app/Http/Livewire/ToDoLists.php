@@ -9,6 +9,7 @@ class ToDoLists extends Component
 {
 
     public $todo;
+    public $editableMessage;
 
     protected $rules = [
         'todo.*.todos' => 'required|not_null|min:1',
@@ -19,14 +20,32 @@ class ToDoLists extends Component
         'todo.*.duedata' => 'required|data',
     ];
 
+    // public function startEditing($index){
+    //     $this->isEditing[$index] = true;
+    // }
+
+
+    public function updatePost()
+    {
+        return "Hello world";
+    }
+
+
     public function resetFields(){
         $this->todo = '';
     }
 
+    public function updateToDo($id){
+        $editableToDo = Todos::findOrFail($id);
+        $editableToDo->update([
+            'todos' => $this->editableMessage,
+         ]);
+    }
 
     public function mount(){
         // $this->todos = $todo->todos
     }
+
 
     public function storeToDo(){
         $this->validate();
@@ -35,7 +54,7 @@ class ToDoLists extends Component
             Todos::create([
                 'todos' => $this->todo,
             ]);
-            session()->flash('success','Post Updated Successfully!!');
+            session()->flash('success','Post Created Successfully!!');
             $this->resetFields();
          }
 
@@ -45,6 +64,27 @@ class ToDoLists extends Component
         }
 
     }
+
+    // public function editToDo($id)
+    // {
+    //     return "post ma shi bu lay";
+    //     try {
+    //         $toDoEditable = Todos::findOrFail($id);
+
+    //         if(!$post){
+    //             session()->flash('error','Post not found');
+    //         }
+    //         else
+    //         {
+    //             var_dump($toDoEditable);
+
+    //             $this->todo = $toDoEditable->todos;
+    //         }
+
+    //     } catch (\Exception $ex) {
+
+    //     }
+    // }
 
     public function deleteToDo($id){
         try{

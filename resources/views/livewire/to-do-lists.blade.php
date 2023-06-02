@@ -1,25 +1,34 @@
 <div class="container flex justify-center mt-6">
 
     <div class="w-7/12">
-
-
-
-
-
-            @forelse($todos as $todo)
+        @forelse($todos as $todo)
 
             <div>
                 <div class="mt-6 border border-gray-900 rounded-lg bg-gray-50 p-2 block">
-                    <div class="flex items-center">
-                    <input id="checkbox-{{$loop->index}}" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                    <label class="ml-2" for="checkbox-{{$loop->index}}">
+
+                <div class="flex items-center" x-data="{ open: false}">
+
+                    <input  type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                    
+                    {{-- {{ $isEditing[3] }} --}}
+                        <div class="ml-2 w-10/12" x-show="open" @click.outside="open = false" x-transition>
+                            <input type="text"
+                                   class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
+                                   name=""
+                                   value="{{ $todo->todos }}"
+                                   wire:model="editableMessage"
+                                   wire:keydown.enter="updateToDo({{ $todo->id }})"
+                             >
+                        </div>
+
+                        <label class="ml-2" @click="open = true" x-show="!open">
                             {{ $todo->todos }}
-                    </label>
+                        </label>
+
                 </div>
 
                 <div class="flex justify-start mt-4">
-
-                        <div class="w-2/4">
+                        <div class="w-10/12">
                             <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Notes </label>
                             <textarea id="message" rows="6" class="mr-6 w-11/12 p-2.5  text-xs text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your notes for tasks here..."></textarea>
                         </div>
@@ -36,22 +45,18 @@
 
                             <button wire:click="deleteToDo({{$todo->id}})" type="button" class="mt-2 text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Delete</button>
                         </div>
-
-                </div>
-
-
-
+                    </div>
                 </div>
 
             </div>
 
-            @empty
+        @empty
 
             <div class="mt-14 border border-gray-900 rounded-md bg-gray-50 h-9 items-center flex justify-center">
                 <h1 class="text-center"> There is no todo here</h1>
             </div>
 
-            @endforelse
+        @endforelse
 
         <form wire:submit.prevent="storeToDo()" class="mt-6 mb-6">
             <label for="search" class="mb-2 text-sm font-medium text-gray-900 sr-only">Search</label>
