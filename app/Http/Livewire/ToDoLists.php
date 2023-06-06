@@ -35,10 +35,10 @@ class ToDoLists extends Component
         $this->todo = '';
     }
 
-    public function updateToDo($id){
+    public function updateToDo($id,$message){
         $editableToDo = Todos::findOrFail($id);
         $editableToDo->update([
-            'todos' => $this->editableMessage,
+            'todos' => $message,
          ]);
     }
 
